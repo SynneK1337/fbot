@@ -34,7 +34,9 @@ class Bot(Client):
                 "Temperatura: {}°C\r\n"
                 "Status: {}\r\n"
                 "Prędkość wiatru {} m/s".format(city, temp, status, wind_speed))
-                    
+        else:
+            return "Something went wrong... correct command usage example: pogoda Gizycko,pl"
+            
     def onMessage(self, author_id, message_object, thread_id, thread_type, **kwargs):
         commands = {}
         self.markAsDelivered(thread_id, thread_type)

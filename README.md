@@ -17,5 +17,12 @@ docker build -t fbot .
 docker run fbot
 ```
 
+# Generating OpenWeatherMap API Key
+* Go to ```https://home.openweathermap.org/api_keys```
+* Create an account
+* Enter key name and click ```generate```
+* Copy your key to ```config.cfg``` file
+* Enjoy
+
 # Known issues
 * Time inside docker container isn' t synchronized with host
