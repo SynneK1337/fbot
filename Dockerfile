@@ -4,4 +4,5 @@ RUN pip install fbchat
 COPY main.py /home/fbot
 COPY config.cfg /home/fbot
 USER fbot
-CMD python /home/fbot/main.py
+WORKDIR /home/fbot
+CMD python main.py
