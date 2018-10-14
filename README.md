@@ -8,7 +8,7 @@ Simple Facebook Bot
 # Usage
 **Edit ```config.cfg``` file before running**
 ```
-pip install fbchat
+pip install -r requirements.txt
 python main.py
 ```
 or
