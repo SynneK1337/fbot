@@ -16,3 +16,6 @@ or
 docker build -t fbot .
 docker run fbot
 ```
+
+# Known issues
+* Time inside docker container isn' t synchronized with host
