@@ -2,6 +2,7 @@ from fbchat import Client
 from fbchat.models import *
 from time import strftime
 import configparser
+import requests
 
 class Config():
     def __init__(self):
@@ -10,6 +11,7 @@ class Config():
         self.login = config['credentials']['nickname']
         self.password = config['credentials']['password']
         self.conversation_id = config['settings']['conversation_id']
+        self.api_key = config['openweathermap']['api_key']
 
 class Bot(Client):
     conversation_id = Config().conversation_id
@@ -19,7 +21,20 @@ class Bot(Client):
             return "Most jest otwarty."
         else:
             return "Most jest zamknięty."
-
+    def pogoda(self, city):
+        api_key = Config().api_key
+        params = {'q':city, 'APPID':api_key, 'units':'metric'}
+        r = requests.get("https://api.openweathermap.org/data/2.5/weather", params)
+        if r.status_code == 200:
+            r_json = r.json()
+            temp = r_json['main']['temp']
+            status = r_json['weather'][0]['description']
+            wind_speed = r_json['wind']['speed']
+            return ("Pogoda w {}\r\n"
+                "Temperatura: {}°C\r\n"
+                "Status: {}\r\n"
+                "Prędkość wiatru {} m/s".format(city, temp, status, wind_speed))
+                    
     def onMessage(self, author_id, message_object, thread_id, thread_type, **kwargs):
         commands = {}
         self.markAsDelivered(thread_id, thread_type)
