@@ -45,7 +45,7 @@ class Bot(Client):
         for command_name in dir(self):
             commands[command_name] = getattr(self, command_name)
         command, args = (msg.split(" ", 1) + [" "])[:2]
-        if command in commands:
+        if command in commands and author_id != self.uid:
             if len(args)>1:
                 self.send(Message(commands[command](args)), thread_id=self.conversation_id)
             else:
